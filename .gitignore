@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+
+# Environment variables
+.env
+
+# AWS credentials and secrets
+*.csv
+*.numbers
+*.pem
+credentials
+.aws/
+
+# Streamlit
+.streamlit/
+
+# Mac files
+.DS_Store
