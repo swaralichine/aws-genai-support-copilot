@@ -1,4 +1,11 @@
-# Python
+# Vector database
+vector_db/
+
+# Generated documentation data
+data/raw_docs/
+data/processed_docs/
+
+# Python cache
 __pycache__/
 *.pyc
 
@@ -8,15 +15,11 @@ __pycache__/
 # Environment variables
 .env
 
-# AWS credentials and secrets
+# AWS credentials
 *.csv
 *.numbers
-*.pem
 credentials
 .aws/
-
-# Streamlit
-.streamlit/
 
 # Mac files
 .DS_Store

@@ -1,102 +1,224 @@
 # ☁️ AWS GenAI Support Engineer Copilot
 
-An AI-powered AWS troubleshooting assistant built using **Amazon Bedrock and Amazon Nova Lite**.
+An AI-powered AWS troubleshooting assistant built using **Amazon Bedrock, Amazon Nova Lite, and Retrieval Augmented Generation (RAG)**.
 
-This application helps cloud engineers analyze AWS issues, identify probable root causes, generate troubleshooting workflows, and provide AWS CLI remediation steps using Generative AI.
-
----
-
-## 🚀 Project Overview
-
-Cloud support engineers spend significant time investigating production incidents, analyzing error messages, and searching documentation to identify solutions.
-
-The **AWS GenAI Support Engineer Copilot** uses Amazon Bedrock to provide an AI-powered assistant that can:
-
-- Analyze AWS cloud errors
-- Identify possible root causes
-- Generate troubleshooting steps
-- Recommend AWS CLI commands
-- Suggest remediation actions
-
-The goal is to accelerate cloud incident resolution and improve support engineering workflows.
+This application helps cloud engineers analyze AWS issues, retrieve relevant AWS documentation, identify probable root causes, generate troubleshooting workflows, and provide AWS CLI remediation steps using Generative AI.
 
 ---
 
-## 🏗️ Architecture
+# 🚀 Project Overview
+
+Cloud support engineers spend significant time investigating production incidents, analyzing error messages, and searching through documentation to identify solutions.
+
+The **AWS GenAI Support Engineer Copilot** combines:
+
+- Generative AI using Amazon Bedrock
+- Amazon Nova Lite foundation model
+- Retrieval Augmented Generation (RAG)
+- AWS documentation knowledge retrieval
+- Semantic search using vector embeddings
+
+The goal is to accelerate cloud incident resolution and provide accurate, documentation-grounded troubleshooting guidance.
+
+---
+
+# 🏗️ Architecture
 
 ```
-User
- |
- |
-Streamlit Web Application
- |
- |
-Python Application Layer
- |
- |
-Amazon Bedrock Runtime API
- |
- |
-Amazon Nova Lite Foundation Model
- |
- |
-AI Generated Troubleshooting Response
+                    User
+                      |
+                      |
+              Streamlit Application
+                      |
+                      |
+              User AWS Issue
+                      |
+                      |
+              RAG Retrieval Layer
+                      |
+        --------------------------------
+        |                              |
+ AWS Documentation              FAISS Vector DB
+        |                              |
+        |                       Semantic Search
+        |
+ Official AWS Documentation
+        |
+        |
+ Retrieved Context
+                      |
+                      |
+          Amazon Bedrock Runtime API
+                      |
+                      |
+             Amazon Nova Lite Model
+                      |
+                      |
+       AI Generated Troubleshooting Response
 ```
 
 ---
 
-## ✨ Features
+# ✨ Features
+
+## Completed Features
 
 ✅ AI-powered AWS incident analysis  
-✅ Cloud troubleshooting assistant  
+✅ Amazon Bedrock integration  
+✅ Amazon Nova Lite foundation model  
+✅ Retrieval Augmented Generation (RAG) pipeline  
+✅ AWS documentation ingestion pipeline  
+✅ Semantic document search  
+✅ FAISS vector database integration  
+✅ AWS documentation-grounded responses  
 ✅ Root cause analysis generation  
+✅ Troubleshooting workflow generation  
 ✅ AWS CLI command recommendations  
 ✅ Interactive Streamlit interface  
-✅ Amazon Bedrock integration  
-✅ Low-cost serverless GenAI architecture  
+✅ AWS service documentation references  
 
 ---
 
-## 🛠️ Technology Stack
+# 🧠 RAG Implementation
 
-### Cloud & AI
+The application uses a Retrieval Augmented Generation architecture.
+
+## Document Ingestion Pipeline
+
+Official AWS documentation is collected and processed:
+
+Supported services:
+
+- Amazon S3
+- Amazon EC2
+- AWS IAM
+- AWS Lambda
+- Amazon CloudWatch
+- Amazon VPC
+- AWS KMS
+- AWS STS
+- Amazon EBS
+- Amazon Route 53
+
+
+Pipeline:
+
+```
+AWS Documentation
+        |
+        |
+HTML Extraction
+        |
+        |
+Text Processing
+        |
+        |
+Document Chunking
+        |
+        |
+Embedding Generation
+        |
+        |
+FAISS Vector Database
+```
+
+
+## Retrieval Workflow
+
+When a user submits an AWS issue:
+
+```
+User Question
+
+      |
+
+Generate Query Embedding
+
+      |
+
+FAISS Similarity Search
+
+      |
+
+Retrieve Relevant AWS Documentation
+
+      |
+
+Send Context + Question to Amazon Nova Lite
+
+      |
+
+Generate Grounded Troubleshooting Response
+```
+
+---
+
+# 🛠️ Technology Stack
+
+## Cloud & AI
 
 - Amazon Bedrock
 - Amazon Nova Lite
+- AWS Documentation
 - AWS CLI
 
-### Programming
+
+## Programming
 
 - Python
 
-### Frameworks & Libraries
+
+## Frameworks & Libraries
 
 - Streamlit
 - boto3
-- python-dotenv
+- FAISS
+- Sentence Transformers
+- LangChain Text Splitters
+- BeautifulSoup
+- Requests
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```
 aws-genai-support-copilot/
 
 │
-├── app.py                  # Streamlit frontend application
-├── bedrock.py              # Amazon Bedrock API integration
-├── config.py               # AWS configuration management
-├── requirements.txt        # Python dependencies
-├── README.md               # Project documentation
-├── .gitignore
-└── .env                    # Local environment configuration
+├── app.py                    # Streamlit frontend application
+│
+├── bedrock.py                # Amazon Bedrock integration and prompt handling
+│
+├── rag.py                    # Vector search and context retrieval
+│
+├── vector_store.py           # Embedding generation and FAISS index creation
+│
+├── config.py                 # AWS configuration management
+│
+├── scripts/
+│   └── ingest_docs.py        # AWS documentation ingestion pipeline
+│
+├── data/
+│   ├── raw_docs/             # Downloaded AWS documentation
+│   └── processed_docs/       # Processed text documents
+│
+├── vector_db/                # FAISS vector index storage
+│
+├── screenshots/              # Application screenshots
+│
+├── requirements.txt          # Python dependencies
+│
+├── README.md                 # Project documentation
+│
+└── .gitignore
 ```
 
 ---
 
-## ⚙️ Setup Instructions
+# ⚙️ Setup Instructions
 
-### 1. Clone Repository
+## 1. Clone Repository
 
 ```bash
 git clone https://github.com/swaralichine/aws-genai-support-copilot.git
@@ -106,13 +228,13 @@ cd aws-genai-support-copilot
 
 ---
 
-### 2. Create Virtual Environment
+## 2. Create Virtual Environment
 
 ```bash
 python3 -m venv .venv
 ```
 
-Activate the environment:
+Activate:
 
 ### macOS/Linux
 
@@ -122,7 +244,7 @@ source .venv/bin/activate
 
 ---
 
-### 3. Install Dependencies
+## 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -130,7 +252,7 @@ pip install -r requirements.txt
 
 ---
 
-### 4. Configure AWS Credentials
+## 4. Configure AWS Credentials
 
 Configure AWS CLI:
 
@@ -138,7 +260,7 @@ Configure AWS CLI:
 aws configure
 ```
 
-Verify AWS identity:
+Verify:
 
 ```bash
 aws sts get-caller-identity
@@ -146,9 +268,9 @@ aws sts get-caller-identity
 
 ---
 
-### 5. Configure Environment Variables
+## 5. Configure Environment Variables
 
-Create a `.env` file:
+Create `.env`
 
 ```env
 AWS_REGION=us-east-1
@@ -157,15 +279,37 @@ BEDROCK_MODEL_ID=amazon.nova-lite-v1:0
 
 ---
 
-### 6. Run Application
+## 6. Download AWS Documentation
 
-Start the Streamlit application:
+Run:
+
+```bash
+python scripts/ingest_docs.py
+```
+
+This downloads official AWS documentation for supported services.
+
+---
+
+## 7. Build Vector Database
+
+Generate embeddings and create FAISS index:
+
+```bash
+python vector_store.py
+```
+
+---
+
+## 8. Run Application
+
+Start Streamlit:
 
 ```bash
 streamlit run app.py
 ```
 
-Application will be available at:
+Application:
 
 ```
 http://localhost:8501
@@ -173,28 +317,29 @@ http://localhost:8501
 
 ---
 
-## 🧪 Example Use Cases
+# 🧪 Example Use Cases
 
-### Amazon S3 Troubleshooting
+## Amazon S3 Troubleshooting
 
 Input:
 
 ```
-AccessDenied error while uploading objects to S3 bucket.
+My S3 upload is failing with AccessDenied error.
 How do I troubleshoot?
 ```
 
+
 The AI assistant provides:
 
-- Possible IAM permission issues
+- IAM permission analysis
 - Bucket policy checks
 - KMS permission validation
 - AWS CLI troubleshooting commands
-- Recommended resolution steps
+- Recommended remediation steps
 
 ---
 
-### Amazon EC2 Troubleshooting
+## Amazon EC2 Troubleshooting
 
 Input:
 
@@ -203,33 +348,35 @@ My EC2 instance is unreachable.
 System status check failed.
 ```
 
+
 The AI assistant provides:
 
-- Root cause analysis
-- Instance health checks
-- Network troubleshooting steps
+- Instance health analysis
+- Networking troubleshooting
+- Security group validation
 - Recovery recommendations
 
 ---
 
-## 🔐 Security Considerations
+# 🔐 Security Considerations
 
-- AWS credentials are stored locally using environment variables
+- AWS credentials are stored locally
 - `.env` files are excluded from Git tracking
-- No credentials or secrets are committed to the repository
+- AWS keys are not committed
+- Sensitive files are protected using `.gitignore`
 
 ---
 
-## 💰 Cost Optimization
+# 💰 Cost Optimization
 
-This project uses Amazon Bedrock serverless foundation models.
+This project uses serverless AWS Generative AI services.
 
-Development cost remains minimal because:
+Cost optimization:
 
 - No EC2 infrastructure required
-- No always-running services
-- Pay-per-request model invocation
-- Serverless architecture
+- No always-running backend services
+- Pay-per-request Bedrock invocation
+- Local FAISS vector database
 
 Estimated development/testing cost:
 
@@ -239,21 +386,55 @@ Estimated development/testing cost:
 
 ---
 
-## 🔮 Future Enhancements
+# 🔮 Future Enhancements
 
-Planned improvements:
+## Conversation Memory
 
-- Retrieval Augmented Generation (RAG) using AWS documentation
-- Vector database integration
-- AWS service classification
+Add multi-turn troubleshooting conversations.
+
+Planned capabilities:
+
+- Maintain previous user queries
+- Enable follow-up troubleshooting questions
+- Provide context-aware recommendations
+
+
+## Confidence Score
+
+Add AI-generated confidence scoring.
+
+Planned capabilities:
+
+- Display confidence percentage
+- Explain confidence reasoning
+- Improve transparency of AI responses
+
+
+## AWS Issue Classification
+
+Automatically classify incoming AWS issues.
+
+Planned capabilities:
+
+- Identify AWS service involved
+- Categorize issue type
+- Assign severity level
+- Improve troubleshooting workflow routing
+
+
+## Additional Enhancements
+
+Future improvements:
+
 - CloudWatch log analysis
-- Incident severity prediction
-- Automated remediation recommendations
+- Automated remediation workflows
+- AWS Well-Architected Framework integration
 - Enterprise knowledge base integration
+- Advanced observability metrics
 
 ---
 
-## 👩‍💻 Author
+# 👩‍💻 Author
 
 **Swarali Chine**
 
@@ -261,13 +442,16 @@ Senior Technical Support Engineer | AWS | Cloud Computing | Generative AI
 
 ---
 
-## ⭐ Project Highlights
+# ⭐ Project Highlights
 
 Built using:
 
 - Amazon Bedrock
 - Amazon Nova Lite
+- Retrieval Augmented Generation
+- FAISS Vector Search
 - Python
 - Streamlit
 
-Demonstrates practical application of Generative AI for cloud operations, troubleshooting automation, and support engineering workflows.
+
+This project demonstrates a practical Generative AI application for cloud operations, troubleshooting automation, and AWS support engineering workflows.

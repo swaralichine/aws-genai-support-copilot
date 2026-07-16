@@ -1,6 +1,7 @@
 import streamlit as st
 
 from bedrock import ask_bedrock
+from rag import retrieve_context
 
 
 st.set_page_config(
@@ -11,38 +12,58 @@ st.set_page_config(
 
 
 with st.sidebar:
-    st.header("AWS GenAI Copilot")
 
-    st.write("Powered by:")
-    st.write("- Amazon Bedrock")
-    st.write("- Amazon Nova Lite")
-    st.write("- Python")
-    st.write("- Streamlit")
+    st.header("☁️ AWS GenAI Copilot")
+
+    st.write(
+        """
+        Powered by:
+
+        - Amazon Bedrock
+        - Amazon Nova Lite
+        - FAISS Vector Search
+        - Python
+        - Streamlit
+        """
+    )
 
     st.divider()
 
-    st.write("Version: MVP v1.0")
-    st.write("Developed by")
-    st.write("Swarali Chine")
+    st.write(
+        "Version: MVP v2.0"
+    )
+
+    st.write(
+        "Developed by"
+    )
+
+    st.write(
+        "**Swarali Chine**"
+    )
 
 
-st.title("AWS GenAI Support Engineer Copilot")
 
-st.write(
-    "☁️ AI-powered cloud troubleshooting assistant using Amazon Bedrock + Nova Lite"
+st.title(
+    "☁️ AWS GenAI Support Engineer Copilot"
+)
+
+
+st.caption(
+    "AI-powered cloud troubleshooting assistant using Amazon Bedrock + RAG"
 )
 
 
 st.write(
     """
-    Analyze AWS errors, identify probable root causes,
-    and generate troubleshooting workflows with AWS CLI guidance.
+    Analyze AWS errors, retrieve relevant AWS documentation,
+    identify probable root causes, and generate troubleshooting workflows.
     """
 )
+
 
 
 user_input = st.text_area(
-    "Paste your AWS error or question:",
+    "🔎 Paste your AWS error or question:",
     height=180,
     placeholder="""
 Example:
@@ -55,39 +76,75 @@ How do I troubleshoot?
 )
 
 
+
 if st.button("🚀 Analyze Issue"):
+
 
     if user_input.strip():
 
-        with st.spinner("Analyzing with Amazon Nova Lite..."):
 
-            response = ask_bedrock(
-                f"""
-You are a Senior AWS Support Engineer.
+        with st.spinner(
+            "Searching AWS documentation and analyzing with Nova Lite..."
+        ):
 
-Analyze this AWS issue:
 
-{user_input}
-
-Provide your response using this format:
-
-## Summary
-
-## Root Cause
-
-## Troubleshooting Steps
-
-## AWS CLI Commands
-
-## Recommended Fix
-"""
+            context, sources = retrieve_context(
+                user_input
             )
 
-        st.subheader("AI Analysis")
 
-        st.markdown(response)
+            response = ask_bedrock(
+                user_input,
+                context
+            )
+
+
+
+        st.subheader(
+            "🤖 AI Analysis"
+        )
+
+
+        st.markdown(
+            response
+        )
+
+
+
+        st.divider()
+
+
+
+        st.subheader(
+            "📚 AWS Documentation Used"
+        )
+
+
+        unique_sources = {}
+
+
+        for source in sources:
+
+            unique_sources[
+                source["service"]
+            ] = source["url"]
+
+
+
+        for service, url in unique_sources.items():
+
+            st.markdown(
+                f"""
+                ✅ **{service}**
+
+                {url}
+                """
+            )
+
+
 
     else:
+
         st.warning(
             "Please enter an AWS issue before analyzing."
         )
