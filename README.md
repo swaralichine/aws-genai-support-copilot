@@ -1,4 +1,4 @@
-# ☁️ AWS GenAI Support Engineer Copilot
+# AWS GenAI Support Engineer Copilot
 
 An AI-powered AWS troubleshooting assistant built using **Amazon Bedrock, Amazon Nova Lite, and Retrieval Augmented Generation (RAG)**.
 
@@ -6,7 +6,7 @@ This application helps cloud engineers analyze AWS issues, retrieve relevant AWS
 
 ---
 
-# 🚀 Project Overview
+# Project Overview
 
 Cloud support engineers spend significant time investigating production incidents, analyzing error messages, and searching through documentation to identify solutions.
 
@@ -22,7 +22,7 @@ The goal is to accelerate cloud incident resolution and provide accurate, docume
 
 ---
 
-# 🏗️ Architecture
+# Architecture
 
 ```
                     User
@@ -59,7 +59,7 @@ The goal is to accelerate cloud incident resolution and provide accurate, docume
 
 ---
 
-# ✨ Features
+# Features
 
 ## Completed Features
 
@@ -79,7 +79,7 @@ The goal is to accelerate cloud incident resolution and provide accurate, docume
 
 ---
 
-# 🧠 RAG Implementation
+# RAG Implementation
 
 The application uses a Retrieval Augmented Generation architecture.
 
@@ -153,7 +153,7 @@ Generate Grounded Troubleshooting Response
 
 ---
 
-# 🛠️ Technology Stack
+# Technology Stack
 
 ## Cloud & AI
 
@@ -180,7 +180,7 @@ Generate Grounded Troubleshooting Response
 
 ---
 
-# 📂 Project Structure
+# Project Structure
 
 ```
 aws-genai-support-copilot/
@@ -216,7 +216,7 @@ aws-genai-support-copilot/
 
 ---
 
-# ⚙️ Setup Instructions
+# Setup Instructions
 
 ## 1. Clone Repository
 
@@ -317,7 +317,7 @@ http://localhost:8501
 
 ---
 
-# 🧪 Example Use Cases
+# Example Use Cases
 
 ## Amazon S3 Troubleshooting
 
@@ -358,7 +358,7 @@ The AI assistant provides:
 
 ---
 
-# 🔐 Security Considerations
+# Security Considerations
 
 - AWS credentials are stored locally
 - `.env` files are excluded from Git tracking
@@ -367,7 +367,7 @@ The AI assistant provides:
 
 ---
 
-# 💰 Cost Optimization
+# Cost Optimization
 
 This project uses serverless AWS Generative AI services.
 
@@ -386,7 +386,7 @@ Estimated development/testing cost:
 
 ---
 
-# 🔮 Future Enhancements
+# Future Enhancements
 
 ## Conversation Memory
 
@@ -434,7 +434,7 @@ Future improvements:
 
 ---
 
-# 👩‍💻 Author
+# Author
 
 **Swarali Chine**
 
@@ -442,7 +442,7 @@ Senior Technical Support Engineer | AWS | Cloud Computing | Generative AI
 
 ---
 
-# ⭐ Project Highlights
+# Project Highlights
 
 Built using:
 
